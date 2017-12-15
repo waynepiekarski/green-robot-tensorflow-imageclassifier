@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.AudioManager;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
@@ -75,6 +76,13 @@ public class ImageClassifierActivity extends Activity implements ImageReader.OnI
         mResultViews[0] = (TextView) findViewById(R.id.result1);
         mResultViews[1] = (TextView) findViewById(R.id.result2);
         mResultViews[2] = (TextView) findViewById(R.id.result3);
+
+        // The speaker is usually very quiet, the default is 5 out of a max of 15, so boost it up
+        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        Log.d(TAG, "Maximum volume is " + audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        Log.d(TAG, "Current volume is " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+        Log.d(TAG, "Changed volume to " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
         init();
     }
