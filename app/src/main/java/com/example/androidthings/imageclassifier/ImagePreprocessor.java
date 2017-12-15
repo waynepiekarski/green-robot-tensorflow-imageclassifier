@@ -54,7 +54,7 @@ public class ImagePreprocessor {
         if (croppedBitmap != null && rgbFrameBitmap != null) {
             ByteBuffer bb = image.getPlanes()[0].getBuffer();
             rgbFrameBitmap = BitmapFactory.decodeStream(new ByteBufferBackedInputStream(bb));
-            Helper.cropAndRescaleBitmap(rgbFrameBitmap, croppedBitmap, 0);
+            Helper.cropAndRescaleBitmap(rgbFrameBitmap, croppedBitmap, -90);
         }
 
         image.close();
